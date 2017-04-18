@@ -82,10 +82,10 @@ void print_table() {
         for(j = 0; j < MAX; j++) {
             if(x == j && y == i) {
                 if(game_mode == 1) {
-                    TCWHTf("|%sF%s",BCMAG,BCNRM);
+                    printf("|%sF%s",BCMAG,BCNRM);
                     continue;
                 } else if(game_mode == 2) {
-                    TCWHTf("|%sC%s",BCMAG,BCNRM);
+                    printf("|%sC%s",BCMAG,BCNRM);
                     continue;
                 }
 
@@ -93,29 +93,29 @@ void print_table() {
             value = table_array[i][j];
 
             if((value >= 0 && value <= 8) || value == 0 || value == 99)
-                TCWHTf("|X");
+                printf("|X");
             else if(value == 10) // clean area
-                TCWHTf("|%s%d%s",TCCYN, value - 10,BCNRM);
+                printf("|%s%d%s",TCCYN, value - 10,BCNRM);
             else if(value == 11) // the number of near mine is 1
-                TCWHTf("|%s%d%s",TCYEL, value - 10,BCNRM);
+                printf("|%s%d%s",TCYEL, value - 10,BCNRM);
             else if(value > 11 && value <= 18) // the number of near mine is greater than 1
-                TCWHTf("|%s%d%s",TCRED, value - 10,BCNRM);
+                printf("|%s%d%s",TCRED, value - 10,BCNRM);
             else if((value >= 20 && value <= 28) || value == 100)
-                TCWHTf("|%sF%s",TCGRN,BCNRM);
+                printf("|%sF%s",TCGRN,BCNRM);
             else
-                TCWHTf("ERROR"); // test purposes
+                printf("ERROR"); // test purposes
 
         }
-        TCWHTf("|\n");
+        printf("|\n");
     }
 
-    TCWHTf("cell values: 'X' unknown, '%s0%s' no mines close, '1-8' number of near mines, '%sF%s' flag in cell\n",TCCYN,BCNRM,TCGRN,KNRM);
+    printf("cell values: 'X' unknown, '%s0%s' no mines close, '1-8' number of near mines, '%sF%s' flag in cell\n",TCCYN,BCNRM,TCGRN,KNRM);
     if(game_mode == 0) {
-        TCWHTf("f (put/remove Flag in cell), c (Check cell), n (New game), q (Exit game): ");
+        printf("f (put/remove Flag in cell), c (Check cell), n (New game), q (Exit game): ");
     } else if(game_mode == 1) {
-        TCWHTf("Enter (select to put/remove Flag in cell), q (Exit selection): ");
+        printf("Enter (select to put/remove Flag in cell), q (Exit selection): ");
     } else if(game_mode == 2) {
-        TCWHTf("Enter (select to check cell), q (Exit selection): ");
+        printf("Enter (select to check cell), q (Exit selection): ");
     }
 
 
@@ -299,16 +299,16 @@ check_mode:
 end_of_game:
     game_mode = 0;
     print_table();
-    TCWHTf("\nGAME OVER\n");
+    printf("\nGAME OVER\n");
 
     if(numMines == 0)
-        TCWHTf("you won!!!!\n");
+        printf("you won!!!!\n");
 
     else
-        TCWHTf("BOOM! you LOOSE!\n");
+        printf("BOOM! you LOOSE!\n");
 
     do {
-        TCWHTf("Are you sure to exit? (y or n)? ");
+        printf("Are you sure to exit? (y or n)? ");
         ch = getch();
         putchar('\n');
         if(ch == 'y' || ch == 'Y') {
@@ -316,9 +316,9 @@ end_of_game:
         } else if(ch == 'n' || ch == 'N') {
             goto new_game;
         }
-        TCWHTf("Please answer y or n\n");
+        printf("Please answer y or n\n");
     } while(1);
-    TCWHTf("See you next time!\n");
+    printf("See you next time!\n");
 
     fflush(stdin);
 
